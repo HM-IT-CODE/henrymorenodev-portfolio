@@ -1,0 +1,7 @@
+{
+  "name": "Henry Moreno - Software Architect Portfolio",
+  "description": "Professional portfolio for Henry Moreno, a Software Architect specializing in enterprise solutions, microservices, and modern digital architectures.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

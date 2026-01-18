@@ -1,0 +1,40 @@
+@startuml
+title MCP-SQLServer-Gemini - Arquitectura
+
+skinparam componentStyle rectangle
+
+package "Frontend" {
+  component "Web Chat (React)" as WebChat
+}
+
+package "Orquestador / Cliente" {
+  component "AI Client\n(gemini-client + mcp-connector)" as AIClient
+}
+
+package "MCP Server" {
+  component "MCP Server\n(mcp-server)" as MCPServer
+}
+
+package "Infra" {
+  database "SQL Server" as SQLServer
+  component "Gemini (LLM)" as Gemini
+}
+
+WebChat --> AIClient : HTTP/WS (mensajes de chat)
+AIClient --> Gemini : API (llamadas de LLM)
+AIClient --> MCPServer : MCP RPC (Stdio / transporte)
+MCPServer --> SQLServer : T-SQL (SELECT)
+Gemini --> AIClient : Respuestas / prompts
+
+note right of MCPServer
+  - Expone recursos (clientes, productos, ventas)
+  - Herramientas: obtener_estructura_db, ejecutar_query_sql
+  - Solo SELECT permitidos
+end note
+
+note left of AIClient
+  - Orquesta LLM ↔ MCP
+  - Comandos CLI (/help, /tools, /clear)
+end note
+
+@enduml
