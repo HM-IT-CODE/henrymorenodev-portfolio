@@ -1,32 +1,26 @@
-
 import React from 'react';
-import { Database, Layout, Cpu, FileText, Repeat } from 'lucide-react';
+import { Database, Layout, Repeat, Cpu, FileText, Server, Code2 } from 'lucide-react';
 
 const services = [
   {
-    title: "Microservicios Distribuidos",
-    description: "Diseño e implementación de arquitecturas backend robustas basadas en eventos y escalabilidad horizontal.",
-    icon: <Database className="w-6 h-6 text-blue-400" />
+    icon: <Database className="w-8 h-8 text-blue-400" />,
+    title: "Integración IA & MCP",
+    description: "Conexión segura de LLMs (Gemini) con bases de datos SQL Server mediante Model Context Protocol (MCP) para asistentes inteligentes corporativos."
   },
   {
-    title: "Migración de Sistemas Legacy",
-    description: "Modernización de infraestructuras obsoletas (.NET/SQL Server) a stacks modernos como NodeJS/NestJS.",
-    icon: <Repeat className="w-6 h-6 text-teal-400" />
+    icon: <Server className="w-8 h-8 text-emerald-400" />,
+    title: "Microservicios & Backend",
+    description: "Desarrollo de APIs robustas y escalables con NestJS, Node.js y .NET. Arquitecturas distribuidas y sincronización multi-sede."
   },
   {
-    title: "Aplicaciones Empresariales",
-    description: "Desarrollo de ERPs modulares, sistemas de salud (DICOM) y soluciones de gestión hotelera.",
-    icon: <Layout className="w-6 h-6 text-purple-400" />
+    icon: <Layout className="w-8 h-8 text-purple-400" />,
+    title: "Full Stack Web Apps",
+    description: "Interfaces modernas y reactivas con React, Next.js y Tailwind CSS. Paneles administrativos complejos y dashbaords en tiempo real."
   },
   {
-    title: "IA y Automatización",
-    description: "Integración de Inteligencia Artificial para optimizar flujos de trabajo y toma de decisiones automatizada.",
-    icon: <Cpu className="w-6 h-6 text-pink-400" />
-  },
-  {
-    title: "Consultoría Técnica",
-    description: "Documentación personalizada, auditoría de código y diseño de hojas de ruta tecnológicas.",
-    icon: <FileText className="w-6 h-6 text-amber-400" />
+    icon: <Code2 className="w-8 h-8 text-amber-400" />,
+    title: "Desktop & Electron",
+    description: "Aplicaciones de escritorio multiplataforma (Windows/macOS) con Electron y React para gestión operativa offline-first."
   }
 ];
 
