@@ -1,6 +1,8 @@
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import Link from 'next/link';
 import { Logo } from './Logo';
 
 interface NavbarProps {
@@ -21,15 +23,15 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
         </div>
 
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
-          <a href="#servicios" className="hover:text-blue-400 transition-colors">Servicios</a>
-          <a href="#portafolio" className="hover:text-blue-400 transition-colors">Portafolio</a>
-          <a href="#recursos" className="hover:text-blue-400 transition-colors">Recursos</a>
+          <Link href="/#servicios" className="hover:text-blue-400 transition-colors">Servicios</Link>
+          <Link href="/#portafolio" className="hover:text-blue-400 transition-colors">Portafolio</Link>
+          <Link href="/#recursos" className="hover:text-blue-400 transition-colors">Recursos</Link>
           <a href="https://wa.me/584145888298" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors font-semibold flex items-center">
             <span>+58 414-5888298</span>
           </a>
-          <a href="#contacto" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
+          <Link href="/#contacto" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">
             Contacto
-          </a>
+          </Link>
         </div>
 
         <button className="md:hidden p-2">
