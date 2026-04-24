@@ -1,106 +1,166 @@
 import React from 'react';
-import { Github, ExternalLink, Terminal, Cpu } from 'lucide-react';
+import { Github, Terminal, Cpu, Smartphone, ServerCog, Boxes } from 'lucide-react';
 
 interface Project {
   id: number;
   title: string;
-  category: string;
+  role: string;
+  period: string;
   image?: string; // Optional image
   icon?: React.ReactNode; // Optional icon for projects without image
   description: string;
+  highlights: string[];
   tech: string[];
+  codeAccess: 'Publico' | 'Privado';
   github?: string;
-  demo?: string;
 }
+
+const visibleHighlights = 2;
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "MCP Server NestJS + PostgreSQL",
-    category: "AI & Backend",
-    image: "/images/projects/mcp-server/main.png",
-    description: "Servidor MCP listo para producción que permite a asistentes de IA (Claude, Cursor) consultar bases de datos PostgreSQL de forma segura. Implementa 'Dual Transport' (STDIO/SSE), validación de queries y logging de auditoría.",
-    tech: ["NestJS", "TypeScript", "PostgreSQL", "Prisma", "MCP Protocol"],
-    github: "https://github.com/HM-IT-CODE/mcp-server-nestjs"
+    title: "Ecosistema de Orquestación IA Empresarial (Bare-Metal)",
+    role: "Arquitecto de Infraestructura & AI Engineer",
+    period: "2025 - Actualidad",
+    image: "/images/projects/grafana/2026-04-16 09 42 55.png",
+    description: "Diseñé un ecosistema empresarial sobre bare-metal para ejecutar automatizaciones con IA, servicios internos y monitoreo centralizado, integrando Docker, n8n, Supabase, Nginx, MikroTik y Grafana bajo una estrategia de aislamiento, observabilidad y endurecimiento de red.",
+    highlights: [
+      "Aislé servicios críticos por capas y dominios operativos para sostener una disponibilidad estimada de 99.9%.",
+      "Resolví el conflicto de favicon y Supabase con un proxy inverso avanzado en Nginx, eliminando errores de enrutamiento.",
+      "Construí dashboards en Grafana que redujeron el tiempo de diagnóstico y respuesta a incidentes en 40%.",
+      "Diseñé Hairpin NAT y segmentación con MikroTik para reducir la superficie de exposición externa en 60%."
+    ],
+    tech: ["Docker", "n8n", "Supabase", "Nginx", "MikroTik", "Grafana"],
+    codeAccess: 'Privado'
   },
   {
     id: 2,
-    title: "Enterprise Microservices Architecture",
-    category: "System Architecture",
-    image: "/images/projects/grpc/main.png",
-    description: "Ecosistema de microservicios (Usuarios, Productos, Órdenes) con comunicación gRPC de alto rendimiento. Implementa patrón 'Database-per-Service', API Gateway, validaciones distribuidas y frontend Next.js 15.",
-    tech: ["NestJS", "gRPC", "Protobuf", "Next.js 15", "PostgreSQL"],
-    github: "https://github.com/HM-IT-CODE"
+    title: "Servidor MCP de Alto Rendimiento para SQL Server Legado",
+    role: "Desarrollador de Sistemas",
+    period: "2025 - Actualidad",
+    image: "/images/projects/mcp-server/main.png",
+    description: "Implementé un servidor MCP de alto rendimiento para exponer datos de SQL Server legado a flujos asistidos por LLMs, con foco en latencia baja, consultas seguras y utilidad operativa para equipos analíticos.",
+    highlights: [
+      "Optimicé joins complejos para responder en menos de 50 ms en escenarios de consulta crítica.",
+      "Aumenté la productividad de analistas en 30% al transformar consultas repetitivas en flujos asistidos por IA.",
+      "Reduje errores manuales de consulta en 25% al encapsular reglas de acceso y trazabilidad."
+    ],
+    tech: ["Rust", "C++", "SQL Server", "LLMs"],
+    codeAccess: 'Privado'
   },
   {
     id: 3,
-    title: "Sistema de Gestión Hotelera",
-    category: "Full Stack",
-    image: "/images/projects/hotel/main.png",
-    description: "Plataforma integral para administración hotelera con dashboard de estado de habitaciones en tiempo real. Gestiona reservas, check-in/out, pagos y limpieza. Arquitectura híbrida Next.js + Electron para operación web y escritorio.",
-    tech: ["Next.js", "Electron", "PostgreSQL", "Prisma", "Material UI"],
+    title: "Motor de Asistente IA Offline para Android (Jarvis Rust Core)",
+    role: "Desarrollador de Núcleo Nativo",
+    period: "2025 - Actualidad",
+    icon: <Cpu className="w-16 h-16 text-zinc-600" />,
+    description: "Desarrollé un núcleo lógico escrito en Rust para una app Android nativa en Kotlin, integrado mediante JNI. Kotlin invoca la función Java_com_example_jarvisapp_MainActivity_processCommand, Rust procesa el texto, almacena el historial en SQLite local y devuelve acciones estructuradas como ABRIR_WHATSAPP o ABRIR_SPOTIFY.",
+    highlights: [
+      "Implementé una arquitectura 100% offline con 0 dependencia de internet para procesamiento y persistencia local.",
+      "Separé la UI en Kotlin y la lógica en Rust, reduciendo acoplamiento técnico en aproximadamente 50%.",
+      "Preparé compilación cdylib para arm64-v8a y x86_64 con cargo-ndk, facilitando despliegue multiplataforma.",
+      "El módulo Rust devuelve la intención; no ejecuta acciones Android directamente, esa responsabilidad queda en Kotlin."
+    ],
+    tech: ["Rust", "Kotlin", "JNI", "SQLite", "rusqlite", "Android NDK", "cargo-ndk"],
+    codeAccess: 'Privado'
   },
   {
     id: 4,
-    title: "Gestión de Garantías",
-    category: "Enterprise Web App",
-    image: "/images/projects/warranty/main.png",
-    description: "Sistema web para el registro y seguimiento de garantías de productos tecnológicos. Incluye validación de clientes por RIF, búsqueda avanzada, reportes de costos en tiempo real y arquitectura serverless con Supabase.",
-    tech: ["React", "Redux Toolkit", "Supabase", "Formik", "SweetAlert2"],
+    title: "Plataforma de Tracking Logístico en Tiempo Real",
+    role: "Full Stack Engineer",
+    period: "2024 - 2025",
+    icon: <ServerCog className="w-16 h-16 text-zinc-600" />,
+    description: "Diseñé una plataforma de tracking logístico conectada a procesos ERP para centralizar trazabilidad operativa, estado de flujo y visibilidad en tiempo real sobre procesos que antes dependían de reportes manuales.",
+    highlights: [
+      "Eliminé reportes manuales del flujo principal de seguimiento, logrando una reducción operativa del 100% en ese proceso.",
+      "Reduje llamadas de soporte en 25% al exponer estado y trazabilidad en tiempo real para usuarios internos.",
+      "Integré automatizaciones con n8n y SQL Server ERP para reducir tiempos de actualización en aproximadamente 45%."
+    ],
+    tech: ["Next.js", "n8n", "SQL Server ERP"],
+    codeAccess: 'Privado'
   },
   {
     id: 5,
-    title: "EnControl - Print Service",
-    category: "Rust & Systems",
-    icon: <Terminal className="w-16 h-16 text-zinc-600" />,
-    description: "Servicio de impresión de alto rendimiento desarrollado en Rust. Funciona como daemon en Windows/macOS para gestionar colas de impresión locales, reintentos automáticos y actualizaciones seguras en entornos críticos.",
-    tech: ["Rust", "Windows Service", "System Daemon", "Tauri"],
-    github: "https://github.com/HM-IT-CODE"
+    title: "Suite de Operaciones de Campo Offline-First (Flutter / React Native)",
+    role: "Mobile & Backend Developer",
+    period: "2024 - Actualidad",
+    icon: <Smartphone className="w-16 h-16 text-zinc-600" />,
+    description: "Desarrollé una suite móvil para operación de campo en entornos industriales sin conectividad confiable, con persistencia en SQLite, ejecución completamente offline y sincronización diferencial segura al recuperar señal.",
+    highlights: [
+      "Garanticé 100% de funcionalidad offline para captura, consulta y actualización de datos.",
+      "Logré cero pérdida de datos al reconectar mediante persistencia transaccional y sincronización diferencial.",
+      "Reduje el volumen de transferencia en aproximadamente 70% frente a sincronizaciones completas."
+    ],
+    tech: ["Flutter", "React Native", "SQLite", "Sincronización diferencial"],
+    codeAccess: 'Privado'
   },
   {
     id: 6,
-    title: "OCR Copy - Native Text Extractor",
-    category: "Desktop Utility",
-    image: "/images/projects/cpp/main.png",
-    description: "Aplicación de escritorio híbrida (Electron + C++ Backend) para capturar regiones de pantalla y extraer texto mediante OCR local. Incluye overlay de selección, lógica nativa en C++ para alto rendimiento y fallback a Tesseract.",
-    tech: ["C++", "Electron", "Node.js", "Tesseract OCR"],
+    title: "Sistema de Gestión Hotelera - Real-Time Orchestration",
+    role: "Full Stack Engineer",
+    period: "2024 - 2025",
+    image: "/images/projects/hotel/main.png",
+    description: "Construí una plataforma hotelera para gestionar habitaciones, reservas, huéspedes, pagos y operación administrativa en una arquitectura híbrida web y escritorio orientada a tiempo real.",
+    highlights: [
+      "Aceleré la operación de recepción en 80% al centralizar check-in, check-out, disponibilidad y pagos en una sola interfaz.",
+      "Reduje tiempos de asignación y actualización de habitaciones en aproximadamente 60% mediante paneles operativos en tiempo real.",
+      "Disminuí errores de coordinación interna en 35% al unificar el estado operativo del hotel para múltiples usuarios."
+    ],
+    tech: ["Next.js", "Electron", "Prisma", "PostgreSQL"],
+    codeAccess: 'Privado'
   },
   {
     id: 7,
-    title: "SaaS Dashboard & Analytics",
-    category: "Web Application",
-    image: "/images/projects/saas/main.png",
-    description: "Dashboard administrativo moderno con autenticación segura y visualización de métricas en tiempo real. Diseño limpio y optimizado para la gestión de usuarios y datos operativos.",
-    tech: ["React", "Node.js", "Material UI", "Chart.js"],
+    title: "Gestión de Garantías - Enterprise Web App",
+    role: "Full Stack Engineer",
+    period: "2024 - 2025",
+    image: "/images/projects/warranty/main.png",
+    description: "Implementé una aplicación empresarial para registro, seguimiento y análisis de reclamos de garantía, con formularios validados, búsquedas avanzadas, reportes y almacenamiento centralizado en la nube.",
+    highlights: [
+      "Reduje el procesamiento de reclamos en 50% al digitalizar el flujo completo de registro y seguimiento.",
+      "Disminuí errores de captura en aproximadamente 35% con validaciones y formularios guiados.",
+      "Aceleré búsquedas por serial, factura y documento en 60% mediante filtros estructurados y reportes operativos."
+    ],
+    tech: ["React", "Redux Toolkit", "Supabase", "jsPDF"],
+    codeAccess: 'Privado'
   },
   {
     id: 8,
-    title: "Massive Data Loader",
-    category: "Desktop Tool",
-    image: "/images/projects/bulk-entry.png",
-    description: "Aplicación de escritorio (Electron) para procesamiento y carga masiva de inventarios en SQL Server. Genera reportes de validación, maneja transacciones complejas y exportación de logs.",
-    tech: ["Electron", "React", "MSSQL", "Node.js"],
+    title: "Otros proyectos de sistemas y producto",
+    role: "Systems / Full Stack Engineer",
+    period: "2024 - 2025",
+    icon: <Boxes className="w-16 h-16 text-zinc-600" />,
+    description: "Desarrollé soluciones complementarias para impresión, OCR, carga masiva y analítica SaaS, orientadas a reducir fricción operativa en entornos empresariales.",
+    highlights: [
+      "EnControl Print Service (Rust): reduje fallos manuales de impresión en aproximadamente 45%.",
+      "OCR Copy (Electron + C++): reduje tiempos de extracción manual de texto en aproximadamente 70%.",
+      "Massive Data Loader (Electron): aceleré cargas masivas en aproximadamente 65% y reduje errores de importación en 40%.",
+      "SaaS Dashboard & Analytics (React): reduje tiempos de lectura operativa en aproximadamente 30%."
+    ],
+    tech: ["Rust", "Electron", "C++", "React"],
+    codeAccess: 'Privado'
   }
 ];
 
 const Portfolio: React.FC = () => {
   return (
-    <section id="portafolio" className="py-20 relative bg-zinc-950">
+    <section id="portafolio" className="py-20 relative bg-stone-900/20">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-400/10 border border-blue-400/20 rounded-full">
+          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-emerald-300 uppercase bg-emerald-500/10 border border-emerald-500/20 rounded-full">
             Portafolio Selecto
           </div>
           <h2 className="text-3xl lg:text-5xl font-bold mb-6">Soluciones <span className="gradient-text">Técnicas</span></h2>
           <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
-            Proyectos que demuestran capacidad en integración de IA, arquitecturas escalables y desarrollo de sistemas críticos.
+            Casos seleccionados para mostrar dónde aporto más valor: IA aplicada, infraestructura crítica, automatización y productos de operación real.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="group relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
-              <div className="aspect-video relative overflow-hidden bg-zinc-950 flex items-center justify-center">
+            <div key={project.id} className="group relative bg-stone-900/50 border border-zinc-800 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col h-full backdrop-blur-[2px]">
+              <div className="aspect-video relative overflow-hidden bg-stone-900 flex items-center justify-center">
                 {project.image ? (
                   <>
                     <img
@@ -108,34 +168,45 @@ const Portfolio: React.FC = () => {
                       alt={project.title}
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-80"></div>
                   </>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-zinc-900 pattern-grid-lg opacity-50">
+                  <div className="w-full h-full flex items-center justify-center bg-stone-900 opacity-50">
                     {project.icon || <Terminal className="w-12 h-12 text-zinc-700" />}
                   </div>
                 )}
 
-                <div className="absolute top-4 left-4 bg-zinc-950/80 backdrop-blur-sm border border-zinc-800 px-3 py-1 rounded-full text-xs font-medium text-blue-400">
-                  {project.category}
+                <div className="absolute top-4 left-4 bg-stone-950/70 backdrop-blur-sm border border-zinc-800 px-3 py-1 rounded-full text-xs font-medium text-emerald-300">
+                  {project.role}
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-3 text-zinc-100 group-hover:text-blue-400 transition-colors">{project.title}</h3>
-                <p className="text-zinc-400 mb-6 text-sm leading-relaxed line-clamp-4 flex-grow">
+              <div className="p-7 flex flex-col flex-grow">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-3">{project.period}</p>
+                <h3 className="text-xl font-semibold mb-3 text-zinc-100 group-hover:text-emerald-300 transition-colors">{project.title}</h3>
+                <p className="text-zinc-400 mb-5 text-sm leading-7 flex-grow">
                   {project.description}
                 </p>
 
+                <ul className="space-y-3 mb-6 text-sm text-zinc-300">
+                  {project.highlights.slice(0, visibleHighlights).map((highlight, index) => (
+                    <li key={index} className="flex gap-3">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-emerald-300 shrink-0"></span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {project.highlights.length > visibleHighlights && (
+                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mb-6">+ {project.highlights.length - visibleHighlights} logros adicionales</p>
+                )}
+
                 <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                  {project.tech.slice(0, 4).map((tech, i) => (
-                    <span key={i} className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded border border-zinc-700">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="px-2.5 py-1 bg-stone-800/80 text-zinc-300 text-xs rounded-full border border-zinc-700/80">
                       {tech}
                     </span>
                   ))}
-                  {project.tech.length > 4 && (
-                    <span className="px-2 py-1 bg-zinc-800 text-zinc-500 text-xs rounded border border-zinc-700">+{project.tech.length - 4}</span>
-                  )}
                 </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-zinc-800/50">
@@ -145,8 +216,9 @@ const Portfolio: React.FC = () => {
                       Ver Código
                     </a>
                   ) : (
-                    <span className="text-zinc-600 text-xs italic">Código Privado</span>
+                    <span className="text-zinc-600 text-xs italic">Código {project.codeAccess}</span>
                   )}
+                  <span className="text-xs uppercase tracking-[0.2em] text-zinc-500">{project.codeAccess}</span>
                 </div>
               </div>
             </div>

@@ -9,7 +9,6 @@ import Portfolio from '../components/Portfolio';
 import Resources from '../components/Resources';
 import WhyWorkWithMe from '../components/WhyWorkWithMe';
 import Contact from '../components/Contact';
-import ChatBot from '../components/ChatBot';
 
 export default function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -26,8 +25,7 @@ export default function Home() {
         <main className="min-h-screen relative">
             {/* Background patterns */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-teal-600/10 rounded-full blur-[120px]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.12),_transparent_38%),radial-gradient(circle_at_bottom_right,_rgba(34,197,94,0.10),_transparent_32%),linear-gradient(180deg,_rgba(24,31,24,0.88)_0%,_rgba(28,36,28,0.72)_40%,_rgba(35,42,35,0.68)_100%)]"></div>
             </div>
 
             <Navbar isScrolled={isScrolled} />
@@ -42,8 +40,6 @@ export default function Home() {
             </div>
 
             <Footer />
-
-            <ChatBot />
         </main>
     );
 }

@@ -47,14 +47,14 @@ const ChatBot: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 z-[100]">
       {isOpen ? (
-        <div className="w-80 sm:w-96 h-[500px] bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+        <div className="w-80 sm:w-96 h-[500px] bg-stone-900/95 border border-zinc-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-sm">
           {/* Header */}
-          <div className="bg-blue-600 p-4 flex justify-between items-center">
+          <div className="bg-emerald-700 p-4 flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <Bot className="w-5 h-5 text-white" />
               <span className="font-bold text-white text-sm">Asistente de Henry</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
+            <button type="button" title="Cerrar asistente" aria-label="Cerrar asistente" onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -64,8 +64,8 @@ const ChatBot: React.FC = () => {
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm ${msg.role === 'user'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-zinc-800 text-zinc-200'
+                  ? 'bg-emerald-700 text-white'
+                  : 'bg-zinc-800 text-zinc-200'
                   }`}>
                   <div className="flex items-center space-x-1 mb-1 opacity-50 text-[10px] uppercase font-bold tracking-widest">
                     {msg.role === 'user' ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
@@ -91,12 +91,14 @@ const ChatBot: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Escribe tu duda..."
-              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              className="flex-1 bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-400"
             />
             <button
               type="submit"
+              title="Enviar mensaje"
+              aria-label="Enviar mensaje"
               disabled={isLoading}
-              className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="bg-emerald-700 text-white p-2 rounded-xl hover:bg-emerald-600 disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
             </button>
@@ -105,9 +107,11 @@ const ChatBot: React.FC = () => {
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform hover:bg-blue-700"
+          title="Abrir asistente"
+          aria-label="Abrir asistente"
+          className="w-12 h-12 bg-emerald-700 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-105 transition-transform hover:bg-emerald-600"
         >
-          <MessageSquare className="w-6 h-6" />
+          <MessageSquare className="w-5 h-5" />
         </button>
       )}
     </div>

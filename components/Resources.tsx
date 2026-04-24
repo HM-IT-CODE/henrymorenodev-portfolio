@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { FileText, MonitorPlay, X, Download, ExternalLink } from 'lucide-react';
+import { FileText, MonitorPlay, X, Download } from 'lucide-react';
 
 interface Resource {
     id: number;
@@ -78,7 +78,7 @@ const Resources: React.FC = () => {
     };
 
     return (
-        <section id="recursos" className="py-20 relative bg-zinc-950 border-t border-zinc-900">
+        <section id="recursos" className="py-20 relative bg-stone-900/25 border-t border-emerald-950/30">
             <div className="container mx-auto px-6">
                 <div className="mb-16 text-center">
                     <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-green-400 uppercase bg-green-400/10 border border-green-400/20 rounded-full">
@@ -92,12 +92,12 @@ const Resources: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {resources.map((resource) => (
-                        <div key={resource.id} className="group relative bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-blue-500/50 transition-all duration-300 flex flex-col items-start h-full">
-                            <div className={`p-3 rounded-lg mb-4 ${resource.type === 'pdf' ? 'bg-red-500/10 text-red-500' : 'bg-orange-500/10 text-orange-500'}`}>
+                        <div key={resource.id} className="group relative bg-stone-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-emerald-500/30 hover:bg-stone-900/60 transition-all duration-300 flex flex-col items-start h-full">
+                            <div className="p-3 rounded-2xl mb-4 bg-emerald-500/10 text-emerald-300 border border-emerald-500/15">
                                 {resource.type === 'pdf' ? <FileText className="w-8 h-8" /> : <MonitorPlay className="w-8 h-8" />}
                             </div>
 
-                            <h3 className="text-lg font-bold text-zinc-100 mb-2 group-hover:text-blue-400 transition-colors">
+                            <h3 className="text-lg font-semibold text-zinc-100 mb-2 group-hover:text-emerald-300 transition-colors">
                                 {resource.title}
                             </h3>
                             <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold mb-6 flex-grow">
@@ -106,8 +106,10 @@ const Resources: React.FC = () => {
 
                             <div className="mt-4 w-full flex gap-3">
                                 <button
+                                    type="button"
+                                    title={`Ver ${resource.title}`}
                                     onClick={() => handleOpen(resource)}
-                                    className="flex-1 py-2 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                    className="flex-1 py-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-sm font-medium transition-colors flex items-center justify-center gap-2"
                                 >
                                     {resource.type === 'pdf' ? <FileText className="w-4 h-4" /> : <MonitorPlay className="w-4 h-4" />}
                                     Ver Online
@@ -125,7 +127,7 @@ const Resources: React.FC = () => {
                         {/* Header */}
                         <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 bg-zinc-950">
                             <div className="flex items-center gap-3">
-                                {selectedResource.type === 'pdf' ? <FileText className="w-5 h-5 text-blue-400" /> : <MonitorPlay className="w-5 h-5 text-orange-400" />}
+                                {selectedResource.type === 'pdf' ? <FileText className="w-5 h-5 text-emerald-300" /> : <MonitorPlay className="w-5 h-5 text-emerald-300" />}
                                 <h3 className="font-bold text-lg text-zinc-100">{selectedResource.title}</h3>
                             </div>
                             <div className="flex items-center gap-4">
@@ -133,8 +135,11 @@ const Resources: React.FC = () => {
                                     <Download className="w-5 h-5" />
                                 </a>
                                 <button
+                                    type="button"
+                                    title="Cerrar visor"
+                                    aria-label="Cerrar visor"
                                     onClick={() => setSelectedResource(null)}
-                                    className="text-zinc-400 hover:text-white transition-colors p-2 hover:bg-red-500/20 hover:text-red-400 rounded-full"
+                                    className="text-zinc-400 transition-colors p-2 hover:bg-red-500/20 hover:text-red-400 rounded-full"
                                 >
                                     <X className="w-6 h-6" />
                                 </button>
